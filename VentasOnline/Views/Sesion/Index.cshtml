@@ -1,0 +1,45 @@
+﻿@model VentasOnline.Models.VT_Perfil
+
+<style>
+    h3 {
+        font-variant-ligatures: normal;
+    }
+</style>
+<div class="row">
+    <div class="jumbotron">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <img src="~/Content/BW Logo.png" width="100" style="border-radius: 50%" height="100" />
+            </div>
+            <div class="col-md-10">
+                <h2>BearWear GT</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Autenticar", "Sesion", FormMethod.Post))
+    {
+        <div class="col-md-6  jumbotron z-depth-3" style="text-align:left">
+            <div class="col-md-12 input-field col s12">
+                @Html.TextBoxFor(m => m.usuario, "Usuario") <label for="usuario">Usuario</label>
+
+            </div>
+            <div class="col-md-12 input-field col s12">
+                @Html.PasswordFor(m => m.contrasena, "Contraseña") <label for="contresena">Contraseña</label>
+            </div>
+            <div class="col-md-12 input-field col s12">
+                @ViewBag.ErrorLogin
+            </div>
+            <div class="col-md-12 input-field col s12" style="color:red">
+                @Html.ActionLink("No tengo cuenta, crear cuenta", "Index", "Usuario")
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <button id="enviar" class="btn btn-primary">Ingresar</button>
+        </div>
+    }
+</div>

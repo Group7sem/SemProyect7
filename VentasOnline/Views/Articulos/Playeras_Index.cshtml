@@ -1,0 +1,51 @@
+﻿@model List<VentasOnline.Models.VT_Articulo>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Articulos a la venta: Playeras</h2>
+    </div>
+    <div class="col-md-6">
+        <p>Frescas playeras con diseños personalizados, si no encuentras tu estilo puedes contactarnos
+        y plasmamos tu diseño favorito. Las mismas se encuentran sujetas a existencias.</p>
+    </div>
+    <div class="col-md-12">
+
+
+        <ul class="cards">
+
+            @foreach (VentasOnline.Models.VT_Articulo playera in Model)
+            {
+                string nombreImagen = playera.descripcion.Trim() + ".jpeg";
+
+                using (Html.BeginForm("AgregarCarrito", "Articulos", FormMethod.Post))
+                {
+                    <li>
+                        <div class="card">
+                            <input type="hidden" value="@playera.id" name="idArticulo" />
+                            <input type="hidden" value="@playera.descripcion.Trim()" name="direccion" />
+                            <img src="~/Content/Articulos/@nombreImagen" class="card__image" alt="" />
+                            <div class="card__overlay">
+                                <div class="card__header">
+                                    @*<img class="card__thumb" src="~/Content/carrito.jpg" alt="" />*@
+                                    <div class="card__header-text">
+                                        <h3 class="card__title"><strong>@playera.descripcion</strong></h3>
+                                        <span class="card__status">Q @playera.precio</span>
+                                        <input type="number" name="cantidad" min="1" value="1" max="@playera.existencia" />
+                                    </div>
+                                    <button type="submit" class="btn btn-dark"><span class="glyphicon glyphicon-shopping-cart"></span>Agregar</button>
+                                </div>
+                                <p class="card__description">
+                                    <strong>Tipo:</strong> @playera.VT_TipoArticulo.nombre <br />
+                                    <strong>Genero:</strong> @playera.VT_Genero.nombre <br />
+                                    <strong>Existencia:</strong>@playera.existencia
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+
+    </div>
+
+</div>

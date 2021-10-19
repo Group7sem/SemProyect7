@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Ventas_ONLINEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="VT_Articulo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idTipoArticulo" Type="Int32" Nullable="false" />
+    <Property Name="idGenero" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="precio" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="existencia" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="VT_Genero" Relationship="Self.FK_VT_Articulo_VT_Genero" FromRole="VT_Articulo" ToRole="VT_Genero" />
+    <NavigationProperty Name="VT_TipoArticulo" Relationship="Self.FK_VT_Articulo_VT_TipoArticulo" FromRole="VT_Articulo" ToRole="VT_TipoArticulo" />
+    <NavigationProperty Name="VT_Orden" Relationship="Self.FK_VT_Orden_VT_Articulo" FromRole="VT_Articulo" ToRole="VT_Orden" />
+  </EntityType>
+  <EntityType Name="VT_Genero">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="VT_Articulo" Relationship="Self.FK_VT_Articulo_VT_Genero" FromRole="VT_Genero" ToRole="VT_Articulo" />
+  </EntityType>
+  <EntityType Name="VT_Orden">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idArticulo" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="departamento" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="zona" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="VT_Articulo" Relationship="Self.FK_VT_Orden_VT_Articulo" FromRole="VT_Orden" ToRole="VT_Articulo" />
+    <NavigationProperty Name="VT_Usuario" Relationship="Self.FK_VT_Orden_VT_Usuario" FromRole="VT_Orden" ToRole="VT_Usuario" />
+  </EntityType>
+  <EntityType Name="VT_Perfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="contrasena" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idTipoPerfil" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="VT_TipoPerfil" Relationship="Self.FK_VT_Perfil_VT_TipoPerfil" FromRole="VT_Perfil" ToRole="VT_TipoPerfil" />
+    <NavigationProperty Name="VT_Usuario" Relationship="Self.FK_VT_Perfil_VT_Usuario" FromRole="VT_Perfil" ToRole="VT_Usuario" />
+  </EntityType>
+  <EntityType Name="VT_TipoArticulo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="VT_Articulo" Relationship="Self.FK_VT_Articulo_VT_TipoArticulo" FromRole="VT_TipoArticulo" ToRole="VT_Articulo" />
+  </EntityType>
+  <EntityType Name="VT_TipoPerfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="VT_Perfil" Relationship="Self.FK_VT_Perfil_VT_TipoPerfil" FromRole="VT_TipoPerfil" ToRole="VT_Perfil" />
+  </EntityType>
+  <EntityType Name="VT_Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="apellidos" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="correo" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="VT_Orden" Relationship="Self.FK_VT_Orden_VT_Usuario" FromRole="VT_Usuario" ToRole="VT_Orden" />
+    <NavigationProperty Name="VT_Perfil" Relationship="Self.FK_VT_Perfil_VT_Usuario" FromRole="VT_Usuario" ToRole="VT_Perfil" />
+    <NavigationProperty Name="VT_Usuario1" Relationship="Self.FK_VT_Usuario_VT_Usuario" FromRole="VT_Usuario" ToRole="VT_Usuario1" />
+    <NavigationProperty Name="VT_Usuario2" Relationship="Self.FK_VT_Usuario_VT_Usuario" FromRole="VT_Usuario1" ToRole="VT_Usuario" />
+  </EntityType>
+  <Association Name="FK_VT_Articulo_VT_Genero">
+    <End Role="VT_Genero" Type="Self.VT_Genero" Multiplicity="1" />
+    <End Role="VT_Articulo" Type="Self.VT_Articulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_Genero">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Articulo">
+        <PropertyRef Name="idGenero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Articulo_VT_TipoArticulo">
+    <End Role="VT_TipoArticulo" Type="Self.VT_TipoArticulo" Multiplicity="1" />
+    <End Role="VT_Articulo" Type="Self.VT_Articulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_TipoArticulo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Articulo">
+        <PropertyRef Name="idTipoArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Orden_VT_Articulo">
+    <End Role="VT_Articulo" Type="Self.VT_Articulo" Multiplicity="1" />
+    <End Role="VT_Orden" Type="Self.VT_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_Articulo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Orden">
+        <PropertyRef Name="idArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Orden_VT_Usuario">
+    <End Role="VT_Usuario" Type="Self.VT_Usuario" Multiplicity="1" />
+    <End Role="VT_Orden" Type="Self.VT_Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Orden">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Perfil_VT_TipoPerfil">
+    <End Role="VT_TipoPerfil" Type="Self.VT_TipoPerfil" Multiplicity="1" />
+    <End Role="VT_Perfil" Type="Self.VT_Perfil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_TipoPerfil">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Perfil">
+        <PropertyRef Name="idTipoPerfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Perfil_VT_Usuario">
+    <End Role="VT_Usuario" Type="Self.VT_Usuario" Multiplicity="1" />
+    <End Role="VT_Perfil" Type="Self.VT_Perfil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VT_Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Perfil">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VT_Usuario_VT_Usuario">
+    <End Role="VT_Usuario" Type="Self.VT_Usuario" Multiplicity="1" />
+    <End Role="VT_Usuario1" Type="Self.VT_Usuario" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VT_Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VT_Usuario1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Ventas_ONLINEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="VT_Articulo" EntityType="Self.VT_Articulo" />
+    <EntitySet Name="VT_Genero" EntityType="Self.VT_Genero" />
+    <EntitySet Name="VT_Orden" EntityType="Self.VT_Orden" />
+    <EntitySet Name="VT_Perfil" EntityType="Self.VT_Perfil" />
+    <EntitySet Name="VT_TipoArticulo" EntityType="Self.VT_TipoArticulo" />
+    <EntitySet Name="VT_TipoPerfil" EntityType="Self.VT_TipoPerfil" />
+    <EntitySet Name="VT_Usuario" EntityType="Self.VT_Usuario" />
+    <AssociationSet Name="FK_VT_Articulo_VT_Genero" Association="Self.FK_VT_Articulo_VT_Genero">
+      <End Role="VT_Genero" EntitySet="VT_Genero" />
+      <End Role="VT_Articulo" EntitySet="VT_Articulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Articulo_VT_TipoArticulo" Association="Self.FK_VT_Articulo_VT_TipoArticulo">
+      <End Role="VT_TipoArticulo" EntitySet="VT_TipoArticulo" />
+      <End Role="VT_Articulo" EntitySet="VT_Articulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Orden_VT_Articulo" Association="Self.FK_VT_Orden_VT_Articulo">
+      <End Role="VT_Articulo" EntitySet="VT_Articulo" />
+      <End Role="VT_Orden" EntitySet="VT_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Orden_VT_Usuario" Association="Self.FK_VT_Orden_VT_Usuario">
+      <End Role="VT_Usuario" EntitySet="VT_Usuario" />
+      <End Role="VT_Orden" EntitySet="VT_Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Perfil_VT_TipoPerfil" Association="Self.FK_VT_Perfil_VT_TipoPerfil">
+      <End Role="VT_TipoPerfil" EntitySet="VT_TipoPerfil" />
+      <End Role="VT_Perfil" EntitySet="VT_Perfil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Perfil_VT_Usuario" Association="Self.FK_VT_Perfil_VT_Usuario">
+      <End Role="VT_Usuario" EntitySet="VT_Usuario" />
+      <End Role="VT_Perfil" EntitySet="VT_Perfil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VT_Usuario_VT_Usuario" Association="Self.FK_VT_Usuario_VT_Usuario">
+      <End Role="VT_Usuario" EntitySet="VT_Usuario" />
+      <End Role="VT_Usuario1" EntitySet="VT_Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

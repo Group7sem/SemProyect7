@@ -1,0 +1,84 @@
+﻿@model List<VentasOnline.Models.VT_Orden>
+@{
+    ViewBag.Title = "Carrito";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Carrito de compras</h2>
+    </div>
+    <div class="col-md-6" style="color:firebrick; display:@ViewBag.display">
+        <h3>No se encontraron articulos seleccionados</h3>
+    </div>
+
+    @if (ViewBag.display == "none") { 
+
+    <div class="col-md-12" >
+        @using (Html.BeginForm("CrearOrden", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Detalles de la entrega</h3>
+            <div class="col-md-12">
+                <hr />
+                <div class="form-group">
+                    @Html.Label("Departamento", htmlAttributes: new { @class = "control-label col-md-2 orden" })
+                    <div class="col-md-12">
+                        @Html.Editor("Departamento", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Zona", htmlAttributes: new { @class = "control-label col-md-2 orden" })
+                    <div class="col-md-12">
+                        @Html.Editor("Zona", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Direccion", htmlAttributes: new { @class = "control-label col-md-2 orden" })
+                    <div class="col-md-12">
+                        @Html.Editor("Direccion", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="text-align:right">
+                <input type="submit" value="Enviar Orden" class="btn btn-primary" />
+            </div>
+        }
+
+    </div>
+    }
+
+    <div class="col-md-12">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Articulo</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (VentasOnline.Models.VT_Orden orden in Model)
+                {
+                    string nombreImagen = orden.direccion.Trim() + ".jpeg";
+                    <tr>
+                        <th scope="row"><img class="card__thumb" src="~/Content/Articulos/@nombreImagen" alt="" /></th>
+                        <td>@orden.direccion</td>
+                        <td>@orden.cantidad</td>
+                        <td>
+                            <a href='@Url.Action("EliminarArticulo", "Home", new{ idArticulo = orden.idArticulo })'>
+                                <img class="card__thumb" src="~/Content/remove.png" />
+                            </a>
+                        </td>
+                        @*<td>@Html.ActionLink("Eliminar", "Playeras_Index", "Articulos")<button type="submit" class="btn btn-danger btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button></td>*@
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee31d2ad6b1d44deb3e5873d3d34e467" Name="Diagram1">
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_Articulo" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_Genero" Width="1.5" PointX="1.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_Orden" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_Perfil" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_TipoArticulo" Width="1.5" PointX="1.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_TipoPerfil" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ventas_ONLINEModel.VT_Usuario" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Articulo_VT_Genero" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Articulo_VT_TipoArticulo" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Orden_VT_Articulo" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Orden_VT_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Perfil_VT_TipoPerfil" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Perfil_VT_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Ventas_ONLINEModel.FK_VT_Usuario_VT_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,78 @@
+﻿@model VentasOnline.Models.VT_Usuario
+
+<style>
+    h3 {
+        font-variant-ligatures: normal;
+    }
+</style>
+<div class="row">
+    <div class="jumbotron">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <img src="~/Content/BW Logo.png" width="100" style="border-radius: 50%" height="100" />
+            </div>
+            <div class="col-md-10">
+                <h2>BearWear GT</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("CrearCuenta", "Usuario", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <h1>Crear cuenta</h1>
+        <div class="col-md-6">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("usuario", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Contraseña", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Password("contrasena")
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="text-align:center">
+            <input type="submit" value="Crear" class="btn btn-primary" />
+        </div>
+    }
+
+</div>
